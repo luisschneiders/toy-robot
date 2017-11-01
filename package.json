@@ -1,0 +1,10 @@
+{
+  "scripts": {
+    "start": "nodemon server.js"
+  },
+  "dependencies": {
+    "lodash": "^4.17.4",
+    "nodemon": "^1.12.1",
+    "vorpal": "^1.12.0"
+  }
+}
