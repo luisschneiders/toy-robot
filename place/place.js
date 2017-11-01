@@ -1,48 +1,48 @@
 'use strict';
 
 const lodash = require('lodash');
-let position = [0, 1, 2, 3, 4];
-let direction = ['NORTH', 'SOUTH', 'EAST', 'WEST', 'north', 'south', 'east', 'west'];
-let iRobot = {
-  isValid: null,
-  requiredPosition: {
-    positionX: null,
-    positionY: null
+const Defaults = require('../defaults/defaults');
+const Place = {
+  command: function (vorpal, options) {
+    vorpal
+      .command('p <RequiredPositionX>, <RequiredPositionY>, <RequiredFace>')
+      .description('Outputs "Requires Position X, Y and Face Direction. E.g. Type: PLACE 0 0 NORTH" ')
+      .action(place);
   },
-  requiredDirection: {
-    face: null
+  isValid: function() {
+    
   }
-};
+}
+
 function place(args, callback) {
   let requiredPosition = chechInputIsValid(args.RequiredPositionX, args.RequiredPositionY);    
   let requiredDirection = checkFaceIsValid(args.RequiredFace);
-
+  let data = {};
   // console.log('requiredPosition.positionX', requiredPosition.positionX);
   // console.log('requiredPosition.positionY', requiredPosition.positionY);
   // console.log('requiredDirection', requiredDirection.robotFace);
 
-  if (requiredPosition.positionX && requiredPosition.positionY && requiredDirection.robotFace) {
-    iRobot.isValid = true;
-    iRobot.requiredPosition.positionX = args.RequiredPositionX;
-    iRobot.requiredPosition.positionY = args.RequiredPositionY;
-    iRobot.requiredDirection.face = args.RequiredFace;
+  if(requiredPosition.positionX && requiredPosition.positionY && requiredDirection.robotFace) {
+    data.isValid = true;
+    data.positionX = args.RequiredPositionX;
+    data.positionY = args.RequiredPositionY;
+    data.face = args.RequiredFace;
+    Defaults.setRobot(data);
   }
 
-  this.log(iRobot);
+  this.log(Defaults.getRobot());
   callback();
 }
 function chechInputIsValid(valueX, valueY) {
-  let positionX = lodash.includes(position, valueX);
-  let positionY = lodash.includes(position, valueY);
+  let positionX = lodash.includes(Defaults.getPosition(), valueX);
+  let positionY = lodash.includes(Defaults.getPosition(), valueY);
+
   return {positionX, positionY};
 }
 function checkFaceIsValid(face) {
-  let robotFace = lodash.includes(direction, face);
+  let robotFace = lodash.includes(Defaults.getDirection(), face);
+  
   return {robotFace};
 }
-module.exports = function (vorpal, options) {
-  vorpal
-    .command('p <RequiredPositionX>, <RequiredPositionY>, <RequiredFace>')
-    .description('Outputs "Requires Position X, Y and Face Direction. E.g. Type: PLACE 0 0 NORTH" ')
-    .action(place);
-}
+
+module.exports = Place;
