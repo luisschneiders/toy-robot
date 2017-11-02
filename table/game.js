@@ -4,10 +4,11 @@ const Defaults = require('../defaults/defaults');
 const robot = {
   requiredPosition: {
     positionX: null,
-    positionY: null
+    positionY: null,
   },
   direction: null,
-  previousDirection: null
+  previousDirection: null,
+  compute: null
 };
 
 let start = false;
@@ -20,6 +21,7 @@ const Game = {
     robot.requiredPosition.positionY = data.positionY;
     robot.direction = data.direction;
     robot.previousDirection = data.previousDirection;
+    robot.compute = data.compute;
   },
   getRobot: function() {
     return robot;    
@@ -37,26 +39,23 @@ const Game = {
     return isValid;
   },
   setMoveX: function(data) {
-    // let direction = null;
     move = data;
-    // direction = move.direction.toUpperCase();
-    // console.log('direction', direction);
     switch(move.direction) {
       case 'NORTH':
-        move.requiredPosition.positionX = move.requiredPosition.positionX + 1;
-        // move.requiredPosition.positionY = move.requiredPosition.positionY + 1;
+        move.requiredPosition.positionX = move.requiredPosition.positionX + move.compute;
+        move.requiredPosition.positionY = move.requiredPosition.positionY + 0;
         break;
       case 'EAST':
-        move.requiredPosition.positionX = move.requiredPosition.positionX + 1;
-        // move.requiredPosition.positionY = move.requiredPosition.positionY + 1;
+        move.requiredPosition.positionX = move.requiredPosition.positionX + move.compute;
+        move.requiredPosition.positionY = move.requiredPosition.positionY + 0
         break;
       case 'SOUTH':
-        move.requiredPosition.positionX = move.requiredPosition.positionX - 1;
-        // move.requiredPosition.positionY = move.requiredPosition.positionY - 1;
+        move.requiredPosition.positionX = move.requiredPosition.positionX - move.compute;
+        move.requiredPosition.positionY = move.requiredPosition.positionY - 1;
         break;
       case 'WEST':
-        move.requiredPosition.positionX = move.requiredPosition.positionX - 1;
-        // move.requiredPosition.positionY = move.requiredPosition.positionY - 1;
+        move.requiredPosition.positionX = move.requiredPosition.positionX - move.compute;
+        move.requiredPosition.positionY = move.requiredPosition.positionY - 1;
         break;        
     }
   },
@@ -64,26 +63,23 @@ const Game = {
     return move;
   },
   setMoveY: function(data) {
-    // let direction = null;
     move = data;
-    // direction = move.direction.toUpperCase();
-    // console.log('direction', direction);
     switch(move.direction) {
       case 'NORTH':
-        // move.requiredPosition.positionX = move.requiredPosition.positionX + 1;
-        move.requiredPosition.positionY = move.requiredPosition.positionY + 1;
+        move.requiredPosition.positionX = move.requiredPosition.positionX + 0;
+        move.requiredPosition.positionY = move.requiredPosition.positionY + move.compute;
         break;
       case 'EAST':
-        // move.requiredPosition.positionX = move.requiredPosition.positionX + 1;
-        move.requiredPosition.positionY = move.requiredPosition.positionY + 1;
+        move.requiredPosition.positionX = move.requiredPosition.positionX + move.compute;
+        move.requiredPosition.positionY = move.requiredPosition.positionY + 0;
         break;
       case 'SOUTH':
-        // move.requiredPosition.positionX = move.requiredPosition.positionX - 1;
+        move.requiredPosition.positionX = move.requiredPosition.positionX - move.compute;
         move.requiredPosition.positionY = move.requiredPosition.positionY - 1;
         break;
       case 'WEST':
-        // move.requiredPosition.positionX = move.requiredPosition.positionX - 1;
-        move.requiredPosition.positionY = move.requiredPosition.positionY - 1;
+        move.requiredPosition.positionX = move.requiredPosition.positionX - 1;
+        move.requiredPosition.positionY = move.requiredPosition.positionY - move.compute;
         break;        
     }
   },

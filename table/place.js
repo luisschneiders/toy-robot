@@ -22,10 +22,13 @@ function place(args, callback) {
     robot.positionX = args.RequiredPositionX;
     robot.positionY = args.RequiredPositionY;
     robot.direction = args.RequiredDirection.toUpperCase();
-    robot.previousDirection = args.RequiredDirection.toUpperCase();
-    console.log('robot.direction', robot.direction);
-    console.log('robot.previousDirection', robot.previousDirection);
+    robot.previousDirection = args.RequiredDirection.toUpperCase();    
     status = true;
+    if (robot.direction == "NORTH" || robot.direction == "EAST") {
+      robot.compute = 1;
+    } else if(robot.direction == "WEST" || robot.direction == "SOUTH") {
+      robot.compute = -1;      
+    }
     Game.setRobot(robot);
     Game.setGame(status);
     Game.setValid(status);

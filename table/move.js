@@ -19,6 +19,7 @@ function move(args, callback) {
     robotPosition = Game.getRobot();
     console.log('Game robotPosition: ', robotPosition);
 
+
     if (robotPosition.previousDirection == "NORTH" || robotPosition.previousDirection == "SOUTH") {
       if (robotPosition.direction == "NORTH" || robotPosition.direction == "SOUTH") {
         Game.setMoveX(robotPosition);
