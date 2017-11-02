@@ -27,7 +27,7 @@ function place(args, callback) {
     if (robot.direction == "NORTH" || robot.direction == "EAST") {
       robot.compute = 1;
     } else if(robot.direction == "WEST" || robot.direction == "SOUTH") {
-      robot.compute = -1;      
+      robot.compute = 0;      
     }
     Game.setRobot(robot);
     Game.setGame(status);

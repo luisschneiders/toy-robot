@@ -42,8 +42,8 @@ const Game = {
     move = data;
     switch(move.direction) {
       case 'NORTH':
-        move.requiredPosition.positionX = move.requiredPosition.positionX + move.compute;
-        move.requiredPosition.positionY = move.requiredPosition.positionY + 0;
+        move.requiredPosition.positionX = move.requiredPosition.positionX + 0;
+        move.requiredPosition.positionY = move.requiredPosition.positionY + move.compute;
         break;
       case 'EAST':
         move.requiredPosition.positionX = move.requiredPosition.positionX + move.compute;
@@ -54,9 +54,9 @@ const Game = {
         move.requiredPosition.positionY = move.requiredPosition.positionY - 1;
         break;
       case 'WEST':
-        move.requiredPosition.positionX = move.requiredPosition.positionX - move.compute;
-        move.requiredPosition.positionY = move.requiredPosition.positionY - 1;
-        break;        
+        move.requiredPosition.positionX = move.requiredPosition.positionX - 1;
+        move.requiredPosition.positionY = move.requiredPosition.positionY - move.compute;
+        break;
     }
   },
   getMoveX: function() {
@@ -80,13 +80,12 @@ const Game = {
       case 'WEST':
         move.requiredPosition.positionX = move.requiredPosition.positionX - 1;
         move.requiredPosition.positionY = move.requiredPosition.positionY - move.compute;
-        break;        
+        break;
     }
   },
   getMoveY: function() {
     return move;
-  }  
-
+  }
 }
 
 module.exports = Game;
