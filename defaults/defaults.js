@@ -1,5 +1,5 @@
 const position = [0, 1, 2, 3, 4];
-const direction = ['NORTH', 'SOUTH', 'EAST', 'WEST', 'north', 'south', 'east', 'west'];
+const direction = ['NORTH', 'EAST', 'SOUTH', 'WEST'];
 
 const Defaults = {
   getPosition: function() {
@@ -7,6 +7,40 @@ const Defaults = {
   },
   getDirection: function() {
     return direction;
+  },
+  getLeft: function(value) {
+    switch(value) {
+      case 'NORTH':
+        value = direction[3];
+        break;
+      case 'EAST':
+        value = direction[0];
+        break;
+      case 'SOUTH':
+        value = direction[1];
+        break;
+      case 'WEST':
+        value = direction[2];
+        break;
+    }
+    return value;
+  },
+  getRight: function(value) {
+    switch(value) {
+      case 'NORTH':
+        value = direction[1];
+        break;
+      case 'EAST':
+        value = direction[2];
+        break;
+      case 'SOUTH':
+        value = direction[3];
+        break;
+      case 'WEST':
+        value = direction[0];
+        break;
+    }
+    return value;
   }
 };
 

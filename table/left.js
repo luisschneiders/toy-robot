@@ -1,18 +1,31 @@
 'use strict';
 
 const lodash = require('lodash');
+const Game = require('../table/game');
 const Defaults = require('../defaults/defaults');
+
+let robot = {};
+let direction = null;
+
 const Left = {
   command: function (vorpal, options) {
     vorpal
-      .command('l ')
-      .description('Outputs "bla bla bla " ')
+      .command('l')
+      .description('Outputs "Type LEFT to change direction" ')
       .action(left);
   }
 }
 
 function left(args, callback) {
+  if(Game.getGame() && Game.getValid()) {
+    robot = Game.getRobot();
+    direction = robot.direction;
+    robot.previousDirection = robot.direction;
+    robot.direction = Defaults.getLeft(direction);
 
+    // console.log('robot direction: ', direction);
+    // console.log('Game robot : ', robot);
+  }
   // this.log(Defaults.getRobot());
   // this.log(Defaults.getValid());
   callback();
