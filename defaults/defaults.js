@@ -1,3 +1,5 @@
+'use strict';
+
 const position = [0, 1, 2, 3, 4];
 const direction = ['NORTH', 'EAST', 'SOUTH', 'WEST'];
 
