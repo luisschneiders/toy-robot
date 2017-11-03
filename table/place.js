@@ -6,7 +6,7 @@ const Game = require('../table/game');
 const Place = {
   command: function (vorpal, options) {
     vorpal
-      .command('p <RequiredPositionX>, <RequiredPositionY>, <RequiredDirection>')
+      .command('PLACE <RequiredPositionX>, <RequiredPositionY>, <RequiredDirection>')
       .description('Outputs "Requires Position X, Y and Direction. E.g. Type: PLACE 0 0 NORTH" ')
       .action(place);
   }

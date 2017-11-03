@@ -10,7 +10,7 @@ let direction = null;
 const Right = {
   command: function (vorpal, options) {
     vorpal
-      .command('r ')
+      .command('RIGHT ')
       .description('Outputs "Type RIGHT to change direction" ')
       .action(right);
   }

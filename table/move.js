@@ -7,7 +7,7 @@ const Defaults = require('../defaults/defaults');
 const Move = {
   command: function (vorpal, options) {
     vorpal
-      .command('m ')
+      .command('MOVE ')
       .description('Outputs "Type MOVE to change robot\'s position" ')
       .action(move);
   }

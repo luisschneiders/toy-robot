@@ -5,7 +5,7 @@ const Game = require('../table/game');
 const Report = {
   command: function (vorpal, options) {
     vorpal
-      .command('re ')
+      .command('REPORT ')
       .description('Outputs "Type REPORT to display toy robot position and direction" ')
       .action(report);
   }
