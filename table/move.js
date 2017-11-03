@@ -22,28 +22,17 @@ function move(args, callback) {
     robotPosition = Game.getRobot();
 
     imaginaryRobot = Object.assign({}, robotPosition);
-    gameIsOn = predictMovement(imaginaryRobot);
+    gameIsOn = Game.predictMovement(imaginaryRobot);
 
     if (gameIsOn) {
       Game.setMove(robotPosition);
       robotPosition = Game.getMove();
     } else {
-      this.log(`Oh boy! we don't have parachute, if you go to this direction, you'll get hurt. Try another direction :)`);
+      this.log(Defaults.getWarning());
     }
   }
   
   callback();
-}
-
-function predictMovement(imaginaryRobot) {
-  let allowedPosition = {};
-  Game.setMove(imaginaryRobot);
-  imaginaryRobot = Game.getMove();
-  allowedPosition = Game.chechPositionIsValid(imaginaryRobot.positionX, imaginaryRobot.positionY);
-  if(allowedPosition.positionX && allowedPosition.positionY) {
-    return true;
-  }
-  return false;
 }
 
 module.exports = Move;

@@ -2,6 +2,9 @@ const position = [0, 1, 2, 3, 4];
 const direction = ['NORTH', 'EAST', 'SOUTH', 'WEST'];
 
 const Defaults = {
+  getWarning: function() {
+    return `Oh boy! we don't have parachute, if you go to this direction, you'll get hurt.  Try another direction :)`;
+  },
   getPosition: function() {
     return position;
   },

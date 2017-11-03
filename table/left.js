@@ -28,8 +28,6 @@ function left(args, callback) {
       robot.compute = 0;      
     }
   }
-  // this.log(Defaults.getRobot());
-  // this.log(Defaults.getValid());
   callback();
 }
 

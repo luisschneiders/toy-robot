@@ -22,12 +22,12 @@ function place(args, callback) {
     robot.positionX = args.RequiredPositionX;
     robot.positionY = args.RequiredPositionY;
     robot.direction = args.RequiredDirection.toUpperCase();
-    robot.previousDirection = args.RequiredDirection.toUpperCase();    
+    robot.previousDirection = args.RequiredDirection.toUpperCase();
     status = true;
     if (robot.direction == "NORTH" || robot.direction == "EAST") {
       robot.compute = 1;
     } else if(robot.direction == "WEST" || robot.direction == "SOUTH") {
-      robot.compute = 0;      
+      robot.compute = 0;
     }
     Game.setRobot(robot);
     Game.setGame(status);

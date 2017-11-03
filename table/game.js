@@ -23,7 +23,7 @@ const Game = {
     robot.compute = data.compute;
   },
   getRobot: function() {
-    return robot;    
+    return robot;
   },
   setGame: function(data) {
     start = data;
@@ -71,6 +71,19 @@ const Game = {
     let robotDirection = lodash.includes(Defaults.getDirection(), direction);
 
     return {robotDirection};
+  },
+  predictMovement: function(imaginaryRobot) {
+    let allowedPosition = {};
+
+    this.setMove(imaginaryRobot);
+
+    imaginaryRobot = this.getMove();
+    allowedPosition = this.chechPositionIsValid(imaginaryRobot.positionX, imaginaryRobot.positionY);
+
+    if(allowedPosition.positionX && allowedPosition.positionY) {
+      return true;
+    }
+    return false;
   }
 }
 

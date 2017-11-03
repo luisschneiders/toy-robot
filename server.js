@@ -13,7 +13,7 @@ vorpal
   .use(Move.command)
   .use(Left.command)
   .use(Right.command)
-  .use(Report.command);;
+  .use(Report.command);
 
 vorpal
   .delimiter('Toy Robot Simulator $')
