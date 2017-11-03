@@ -1,11 +1,10 @@
 'use strict';
 
+const lodash = require('lodash');
 const Defaults = require('../defaults/defaults');
 const robot = {
-  requiredPosition: {
-    positionX: null,
-    positionY: null,
-  },
+  positionX: null,
+  positionY: null,
   direction: null,
   previousDirection: null,
   compute: null
@@ -17,8 +16,8 @@ let move = {};
 
 const Game = {
   setRobot: function(data) {
-    robot.requiredPosition.positionX = data.positionX;
-    robot.requiredPosition.positionY = data.positionY;
+    robot.positionX = data.positionX;
+    robot.positionY = data.positionY;
     robot.direction = data.direction;
     robot.previousDirection = data.previousDirection;
     robot.compute = data.compute;
@@ -38,53 +37,40 @@ const Game = {
   getValid: function() {
     return isValid;
   },
-  setMoveX: function(data) {
+  setMove: function(data) {
     move = data;
     switch(move.direction) {
       case 'NORTH':
-        move.requiredPosition.positionX = move.requiredPosition.positionX + 0;
-        move.requiredPosition.positionY = move.requiredPosition.positionY + move.compute;
+        move.positionX = move.positionX + 0;
+        move.positionY = move.positionY + move.compute;
         break;
       case 'EAST':
-        move.requiredPosition.positionX = move.requiredPosition.positionX + move.compute;
-        move.requiredPosition.positionY = move.requiredPosition.positionY + 0
+        move.positionX = move.positionX + move.compute;
+        move.positionY = move.positionY + 0
         break;
       case 'SOUTH':
-        move.requiredPosition.positionX = move.requiredPosition.positionX - move.compute;
-        move.requiredPosition.positionY = move.requiredPosition.positionY - 1;
+        move.positionX = move.positionX - move.compute;
+        move.positionY = move.positionY - 1;
         break;
       case 'WEST':
-        move.requiredPosition.positionX = move.requiredPosition.positionX - 1;
-        move.requiredPosition.positionY = move.requiredPosition.positionY - move.compute;
+        move.positionX = move.positionX - 1;
+        move.positionY = move.positionY - move.compute;
         break;
     }
   },
-  getMoveX: function() {
+  getMove: function() {
     return move;
   },
-  setMoveY: function(data) {
-    move = data;
-    switch(move.direction) {
-      case 'NORTH':
-        move.requiredPosition.positionX = move.requiredPosition.positionX + 0;
-        move.requiredPosition.positionY = move.requiredPosition.positionY + move.compute;
-        break;
-      case 'EAST':
-        move.requiredPosition.positionX = move.requiredPosition.positionX + move.compute;
-        move.requiredPosition.positionY = move.requiredPosition.positionY + 0;
-        break;
-      case 'SOUTH':
-        move.requiredPosition.positionX = move.requiredPosition.positionX - move.compute;
-        move.requiredPosition.positionY = move.requiredPosition.positionY - 1;
-        break;
-      case 'WEST':
-        move.requiredPosition.positionX = move.requiredPosition.positionX - 1;
-        move.requiredPosition.positionY = move.requiredPosition.positionY - move.compute;
-        break;
-    }
+  chechPositionIsValid: function(valueX, valueY) {
+    let positionX = lodash.includes(Defaults.getPosition(), valueX);
+    let positionY = lodash.includes(Defaults.getPosition(), valueY);
+
+    return {positionX, positionY};
   },
-  getMoveY: function() {
-    return move;
+  checkDirectionIsValid: function(direction) {
+    let robotDirection = lodash.includes(Defaults.getDirection(), direction);
+
+    return {robotDirection};
   }
 }
 

@@ -12,36 +12,38 @@ const Move = {
       .action(move);
   }
 }
+
+let gameIsOn = false;
+let imaginaryRobot = {};
 let robotPosition = {};
 
 function move(args, callback) {
   if(Game.getGame() && Game.getValid()) {
     robotPosition = Game.getRobot();
-    console.log('Game robotPosition: ', robotPosition);
 
+    imaginaryRobot = Object.assign({}, robotPosition);
+    gameIsOn = predictMovement(imaginaryRobot);
 
-    if (robotPosition.previousDirection == "NORTH" || robotPosition.previousDirection == "SOUTH") {
-      if (robotPosition.direction == "NORTH" || robotPosition.direction == "SOUTH") {
-        Game.setMoveX(robotPosition);
-        robotPosition = Game.getMoveX();
-      } else if (robotPosition.direction == "WEST" || robotPosition.direction == "EAST") {
-        Game.setMoveY(robotPosition);
-        robotPosition = Game.getMoveY();
-      }    
-    } else if (robotPosition.previousDirection == "WEST" || robotPosition.previousDirection == "EAST") {
-      if (robotPosition.direction == "NORTH" || robotPosition.direction == "SOUTH") {
-        Game.setMoveY(robotPosition);
-        robotPosition = Game.getMoveY();
-      } else if (robotPosition.direction == "WEST" || robotPosition.direction == "EAST") {
-        Game.setMoveX(robotPosition);
-        robotPosition = Game.getMoveX();
-      }
+    if (gameIsOn) {
+      Game.setMove(robotPosition);
+      robotPosition = Game.getMove();
+    } else {
+      this.log(`Oh boy! we don't have parachute, if you go to this direction, you'll get hurt. Try another direction :)`);
     }
-
-    console.log('MOVE robotPosition', robotPosition);
   }
   
   callback();
+}
+
+function predictMovement(imaginaryRobot) {
+  let allowedPosition = {};
+  Game.setMove(imaginaryRobot);
+  imaginaryRobot = Game.getMove();
+  allowedPosition = Game.chechPositionIsValid(imaginaryRobot.positionX, imaginaryRobot.positionY);
+  if(allowedPosition.positionX && allowedPosition.positionY) {
+    return true;
+  }
+  return false;
 }
 
 module.exports = Move;

@@ -13,8 +13,8 @@ const Place = {
 }
 
 function place(args, callback) {
-  let requiredPosition = chechPositionIsValid(args.RequiredPositionX, args.RequiredPositionY);
-  let requiredDirection = checkDirectionIsValid(args.RequiredDirection.toUpperCase());
+  let requiredPosition = Game.chechPositionIsValid(args.RequiredPositionX, args.RequiredPositionY);
+  let requiredDirection = Game.checkDirectionIsValid(args.RequiredDirection.toUpperCase());
   let robot = {};
   let status = false;
 
@@ -36,19 +36,7 @@ function place(args, callback) {
     Game.setGame(status);
     Game.setValid(status);
   }
-  // this.log(Game.getGame());
   callback();
-}
-function chechPositionIsValid(valueX, valueY) {
-  let positionX = lodash.includes(Defaults.getPosition(), valueX);
-  let positionY = lodash.includes(Defaults.getPosition(), valueY);
-
-  return {positionX, positionY};
-}
-function checkDirectionIsValid(direction) {
-  let robotDirection = lodash.includes(Defaults.getDirection(), direction);
-  
-  return {robotDirection};
 }
 
 module.exports = Place;
